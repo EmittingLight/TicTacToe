@@ -117,24 +117,22 @@ public class TicTacToe implements ActionListener {
     }
 
     private void xWins(int x1, int x2, int x3) {
-        wins(x1, x2, x3);
-        textField.setText("X Победили!");
-        gameOver("X Победили");
+        wins(x1, x2, x3,"X");
     }
 
     private void oWins(int x1, int x2, int x3) {
-        wins(x1, x2, x3);
-        textField.setText("O Победили!");
-        gameOver("O Победили!");
+        wins(x1, x2, x3, "O");
     }
 
-    private void wins(int x1, int x2, int x3) {
+    private void wins(int x1, int x2, int x3, String text) {
         buttons[x1].setBackground(Color.RED);
         buttons[x2].setBackground(Color.RED);
         buttons[x3].setBackground(Color.RED);
         for (int i = 0; i < 9; i++) {
             buttons[i].setEnabled(false);
         }
+        textField.setText(text + " Победили!");
+        gameOver(text + " Победили!");
     }
 
     @Override
