@@ -78,37 +78,37 @@ public class TicTacToe implements ActionListener {
     }
 
     private void matchCheck() {
-        if ((buttons[0].getText().equals("X")) && (buttons[1].getText().equals("X")) && (buttons[2].getText().equals("X"))) {
+        if (someCheck(0, "X") && someCheck(1, "X") && someCheck(2, "X")) {
             xWins(0, 1, 2);
-        } else if ((buttons[0].getText().equals("X")) && (buttons[4].getText().equals("X")) && (buttons[8].getText().equals("X"))) {
+        } else if (someCheck(0, "X") && someCheck(4, "X") && someCheck(8, "X")) {
             xWins(0, 4, 8);
-        } else if ((buttons[0].getText().equals("X")) && (buttons[3].getText().equals("X")) && (buttons[6].getText().equals("X"))) {
+        } else if (someCheck(0, "X") && someCheck(3, "X") && someCheck(6, "X")) {
             xWins(0, 3, 6);
-        } else if ((buttons[1].getText().equals("X")) && (buttons[4].getText().equals("X")) && (buttons[7].getText().equals("X"))) {
+        } else if (someCheck(1, "X") && someCheck(4, "X") && someCheck(7, "X")) {
             xWins(1, 4, 7);
-        } else if ((buttons[2].getText().equals("X")) && (buttons[4].getText().equals("X")) && (buttons[6].getText().equals("X"))) {
+        } else if (someCheck(2, "X") && someCheck(4, "X") && someCheck(6, "X")) {
             xWins(2, 4, 6);
-        } else if ((buttons[2].getText().equals("X")) && (buttons[5].getText().equals("X")) && (buttons[8].getText().equals("X"))) {
+        } else if (someCheck(2, "X") && someCheck(5, "X") && someCheck(8, "X")) {
             xWins(2, 5, 8);
-        } else if ((buttons[3].getText().equals("X")) && (buttons[4].getText().equals("X")) && (buttons[5].getText().equals("X"))) {
+        } else if (someCheck(3, "X") && someCheck(4, "X") && someCheck(5, "X")) {
             xWins(3, 4, 5);
-        } else if ((buttons[6].getText().equals("X")) && (buttons[7].getText().equals("X")) && (buttons[8].getText().equals("X"))) {
+        } else if (someCheck(6, "X") && someCheck(7, "X") && someCheck(8, "X")) {
             xWins(6, 7, 8);
-        } else if ((buttons[0].getText().equals("O")) && (buttons[1].getText().equals("O")) && (buttons[2].getText().equals("O"))) {
+        } else if (someCheck(0, "O") && someCheck(1, "O") && someCheck(2, "O")) {
             oWins(0, 1, 2);
-        } else if ((buttons[0].getText().equals("O")) && (buttons[3].getText().equals("O")) && (buttons[6].getText().equals("O"))) {
+        } else if (someCheck(0, "O") && someCheck(3, "O") && someCheck(6, "O")) {
             oWins(0, 3, 6);
-        } else if ((buttons[0].getText().equals("O")) && (buttons[4].getText().equals("O")) && (buttons[8].getText().equals("O"))) {
+        } else if (someCheck(0, "O") && someCheck(4, "O") && someCheck(8, "O")) {
             oWins(0, 4, 8);
-        } else if ((buttons[1].getText().equals("O")) && (buttons[4].getText().equals("O")) && (buttons[7].getText().equals("O"))) {
+        } else if (someCheck(1, "O") && someCheck(4, "O") && someCheck(7, "O")) {
             oWins(1, 4, 7);
-        } else if ((buttons[2].getText().equals("O")) && (buttons[4].getText().equals("O")) && (buttons[6].getText().equals("O"))) {
+        } else if (someCheck(2, "O") && someCheck(4, "O") && someCheck(6, "O")) {
             oWins(2, 4, 6);
-        } else if ((buttons[2].getText().equals("O")) && (buttons[5].getText().equals("O")) && (buttons[8].getText().equals("O"))) {
+        } else if (someCheck(2, "O") && someCheck(5, "O") && someCheck(8, "O")) {
             oWins(2, 5, 8);
-        } else if ((buttons[3].getText().equals("O")) && (buttons[4].getText().equals("O")) && (buttons[5].getText().equals("O"))) {
+        } else if (someCheck(3, "O") && someCheck(4, "O") && someCheck(5, "O")) {
             oWins(3, 4, 5);
-        } else if ((buttons[6].getText().equals("O")) && (buttons[7].getText().equals("O")) && (buttons[8].getText().equals("O"))) {
+        } else if (someCheck(6, "O") && someCheck(7, "O") && someCheck(8, "O")) {
             oWins(6, 7, 8);
         } else if (counter == 9) {
             textField.setText("Ничья");
@@ -116,8 +116,13 @@ public class TicTacToe implements ActionListener {
         }
     }
 
+    private boolean someCheck(int index, String symbol) {
+        return buttons[index].getText().equals(symbol);
+    }
+
+
     private void xWins(int x1, int x2, int x3) {
-        wins(x1, x2, x3,"X");
+        wins(x1, x2, x3, "X");
     }
 
     private void oWins(int x1, int x2, int x3) {
@@ -128,8 +133,8 @@ public class TicTacToe implements ActionListener {
         buttons[x1].setBackground(Color.RED);
         buttons[x2].setBackground(Color.RED);
         buttons[x3].setBackground(Color.RED);
-        for (int i = 0; i < 9; i++) {
-            buttons[i].setEnabled(false);
+        for (int j = 0; j < 9; j++) {
+            buttons[j].setEnabled(false);
         }
         textField.setText(text + " Победили!");
         gameOver(text + " Победили!");
@@ -140,7 +145,7 @@ public class TicTacToe implements ActionListener {
         for (int i = 0; i < 9; i++) {
             if (e.getSource() == buttons[i]) {
                 if (player_1) {
-                    if (buttons[i].getText() == "") {
+                    if (buttons[i].getText().equals("")) {
                         buttons[i].setForeground(new Color(255, 0, 0));
                         buttons[i].setText("X");
                         player_1 = false;
@@ -149,7 +154,7 @@ public class TicTacToe implements ActionListener {
                         matchCheck();
                     }
                 } else {
-                    if (buttons[i].getText() == "") {
+                    if (buttons[i].getText().equals("")) {
                         buttons[i].setForeground(new Color(0, 0, 255));
                         buttons[i].setText("O");
                         player_1 = true;
